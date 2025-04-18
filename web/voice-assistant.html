@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BAPOLAIC AI Voice Assistant</title>
+  <link rel="icon" href="Chatbot_AI_REMAKEv3.png" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="style.css">
+  <script src="voice_assistant.js" defer></script>
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <img src="Chatbot_AI_REMAKEv3.png" alt="Logo Chatbot" class="logo">
+        <h2>BAPOLAIC AI</h2>
+        <button class="sidebar-close-btn" id="sidebarCloseBtn">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="index.html" class="nav-link" title="Chatbot">
+          <i class="fas fa-comment"></i> Chatbot
+        </a>
+        <a href="voice-assistant.html" class="nav-link active" title="Voice Assistant">
+          <i class="fas fa-microphone-alt"></i> Voice Assistant
+        </a>
+      </nav>
+      <button id="new-chat-btn" class="new-chat-btn">
+        <span><i class="fas fa-plus"></i></span> New Chat
+      </button>
+      <div class="chat-list">
+        <p>No chats.</p>
+      </div>
+      <div class="sidebar-footer">
+        <p>Powered by Gemini API</p>
+      </div>
+    </aside>
+
+    <!-- Overlay for mobile -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Main Voice Assistant Area -->
+    <main class="chat-main">
+      <header class="chat-header">
+        <button class="sidebar-toggle" id="sidebarToggle">
+          <i class="fas fa-bars"></i>
+        </button>
+        <h1>Voice Assistant</h1>
+        <div class="model-info">Using Gemini 2.0 Flash</div>
+      </header>
+      <section class="assistant-section">
+        <button id="voice-assistant-button" class="voice-button">Start Speaking</button>
+        <div id="voice-input-animation" class="hidden">
+          <div class="circle"></div>
+          <div class="circle"></div>
+          <div class="circle"></div>
+        </div>
+        <div id="response-text"></div>
+        <div id="loading-animation" class="hidden">
+          🔄 Waiting for response...
+        </div>
+        <div id="ai-speech-animation" class="hidden">
+          <div class="wave"></div>
+          <div class="wave"></div>
+          <div class="wave"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Footer Section -->
+  <footer>
+    <p>Voice Assistant AI might make mistakes and display inaccurate information. Verify important info.</p>
+  </footer>
+</body>
+</html>

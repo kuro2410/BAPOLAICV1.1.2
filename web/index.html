@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BAPOLAIC AI</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="Chatbot_AI_REMAKEv3.png" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <img src="Chatbot_AI_REMAKEv3.png" alt="Logo Chatbot" class="logo">
+        <h2>BAPOLAIC AI</h2>
+        <button class="sidebar-close-btn" id="sidebarCloseBtn">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="index.html" class="nav-link active" title="Chatbot">
+          <i class="fas fa-comment"></i> Chatbot
+        </a>
+        <a href="voice-assistant.html" class="nav-link" title="Voice Assistant">
+          <i class="fas fa-microphone-alt"></i> Voice Assistant
+        </a>
+      </nav>
+      <button id="new-chat-btn" class="new-chat-btn">
+        <span><i class="fas fa-plus"></i></span> New Chat
+      </button>
+      <div class="chat-list">
+        <p>No chats.</p>
+      </div>
+      <div class="sidebar-footer">
+        <p>Powered by Gemini API</p>
+      </div>
+    </aside>
+
+    <!-- Overlay for mobile -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Main Chat Area -->
+    <main class="chat-main">
+      <header class="chat-header">
+        <button class="sidebar-toggle" id="sidebarToggle">
+          <i class="fas fa-bars"></i>
+        </button>
+        <h1>BAPOLAIC</h1>
+        <div class="model-info">Using Gemini 2.0 Flash</div>
+      </header>
+      <section class="chat-container">
+        <div class="chat-log" id="chatLog">
+          <!-- Chat messages will appear here -->
+        </div>
+        <form id="promptForm" class="prompt-form">
+          <div class="prompt-box">
+            <textarea id="prompt" name="prompt" placeholder="Send a message..."></textarea>
+            <div class="icon-buttons">
+              <label for="imageLoader" class="icon-btn" title="Upload Image">
+                <i class="fas fa-image"></i>
+              </label>
+              <input type="file" id="imageLoader" accept="image/*" style="display:none;" onchange="handleImageUpload()">
+              <label for="fileLoader" class="icon-btn" title="Upload file PDF, DOC, DOCX">
+                <i class="fas fa-file-pdf"></i>
+              </label>
+              <input type="file" id="fileLoader" accept=".pdf,.doc,.docx" style="display:none;" onchange="handleFileUpload()">
+              <button id="voiceInputButton" type="button" class="icon-btn" title="Voice Input">
+                <i class="fas fa-microphone"></i>
+              </button>
+              <button type="submit" class="icon-btn" title="Send">
+                <i class="fas fa-paper-plane"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+      </section>
+    </main>
+  </div>
+
+  <!-- Footer Section -->
+  <footer>
+    <p>BAPOLAIC AI might make mistakes and display inaccurate information. Verify important info.</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://unpkg.com/markdown-it@8.4.2/dist/markdown-it.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.3.1/purify.min.js"></script>
+  <script type="module" src="/main.js"></script>
+  <script>
+    function handleImageUpload() {
+      const imageInput = document.getElementById('imageLoader');
+      const chatLog = document.getElementById('chatLog');
+      if (imageInput.files.length > 0) {
+        const file = imageInput.files[0];
+        const messageDiv = document.createElement('div');
+        messageDiv.classList.add('message', 'user');
+        
+        if (file.type.startsWith('image/')) {
+          const img = document.createElement('img');
+          img.src = URL.createObjectURL(file);
+          img.alt = file.name;
+          img.classList.add('uploaded-image');
+          messageDiv.appendChild(img);
+        }
+        
+        const fileName = document.createElement('p');
+        fileName.textContent = `File: ${file.name}`;
+        messageDiv.appendChild(fileName);
+
+        chatLog.appendChild(messageDiv);
+        chatLog.scrollTop = chatLog.scrollHeight;
+
+        Swal.fire({
+          title: 'Success!',
+          text: 'Image uploaded successfully!',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        });
+      }
+    }
+
+    function handleFileUpload() {
+      const fileInput = document.getElementById('fileLoader');
+      const chatLog = document.getElementById('chatLog');
+      if (fileInput.files.length > 0) {
+        const file = fileInput.files[0];
+        const messageDiv = document.createElement('div');
+        messageDiv.classList.add('message', 'user');
+
+        const fileName = document.createElement('p');
+        fileName.textContent = `File: ${file.name}`;
+        messageDiv.appendChild(fileName);
+
+        chatLog.appendChild(messageDiv);
+        chatLog.scrollTop = chatLog.scrollHeight;
+
+        Swal.fire({
+          title: 'Success!',
+          text: 'File uploaded successfully!',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        });
+      }
+    }
+  </script>
+</body>
+</html>
