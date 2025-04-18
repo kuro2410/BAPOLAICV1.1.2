@@ -22,7 +22,7 @@ app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 20 * 1024 * 1024  # 20 MB in bytes
 app.secret_key = "j382md88,,o93999dop"  # Dibutuhkan untuk sesi Flask
 
-os.environ["GOOGLE_API_KEY"] = "AIzaSyCPkSanXev8XxifUoQKkPxtsLQyTphDS94"
+os.environ["GOOGLE_API_KEY"] = "YOUR API GEMINI"
 
 
 @app.route('/')
